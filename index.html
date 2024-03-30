@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JavaScript Lab</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JavaScript Lab</title>
+  <script type="text/javascript" src="index.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("user-form");
 
-  <body>
-    <script src="index.js"></script>
-  </body>
+      form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const userName = document.getElementById("Name").value;
+        const userEmail = document.getElementById("email").value;
+
+        submitData(userName, userEmail)
+          .then(function(newUserId) {
+            // Display the new user ID
+            document.getElementById("result").innerText = `New user ID: ${newUserId}`;
+          })
+          .catch(function(error) {
+            // Display error message
+            document.getElementById("error-message").innerText = `Error: ${error.message}`;
+          });
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Sample Form</h1>
+  <form id="user-form">
+    <label> Name: <input type="text" name="Name" id="Name"></label><br>
+    <label> email: <input type="text" name="email" id="email"></label><br>
+    <input type="submit" id="submit" value="Submit">
+  </form>
+  <!-- Element to display the new user ID -->
+  <div id="result"></div>
+  <!-- Element to display error messages -->
+  <div id="error-message"></div>
+
+</body>
 
 </html>
